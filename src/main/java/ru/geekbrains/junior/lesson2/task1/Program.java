@@ -10,12 +10,12 @@ public class Program {
     public static void main(String[] args) throws InvocationTargetException, IllegalAccessException {
 
         List<Animal> animalsList = new ArrayList<>();
-        animalsList.add(new Cat("Васька", 11, false));
-        animalsList.add(new Dog("Тмин", 5, "бульдог"));
-        animalsList.add(new Dog("Лада", 7, "беспородный"));
+        animalsList.add(new Cat("Васька", 11, true));
+        animalsList.add(new Dog("Тмин", 5, "бульдог", 25));
+        animalsList.add(new Dog("Лада", 7, "нет породы", 32));
         animalsList.add(new Cat("Люся", 2, true));
         animalsList.add(new Cat("Пушок", 1, false));
-        animalsList.add(new Dog("Рой", 4, "овчарка"));
+        animalsList.add(new Dog("Рой", 4, "овчарка", 51));
 
         Field[] fields;
         Method[] methods;
