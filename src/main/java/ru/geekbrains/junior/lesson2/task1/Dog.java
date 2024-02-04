@@ -3,6 +3,8 @@ package ru.geekbrains.junior.lesson2.task1;
 public class Dog extends Animal {
     private String breed;
     int weight;
+    private void swim(){
+    }
     private void makeSound() {
         System.out.print("Гав-гав-гав!");
     }
