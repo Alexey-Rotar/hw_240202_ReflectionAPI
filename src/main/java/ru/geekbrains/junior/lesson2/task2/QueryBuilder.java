@@ -94,7 +94,7 @@ public class QueryBuilder {
     }
 
     /**
-     * Построить запрос на удаление данных из бд
+     * Построить запрос на обновление данных из бд
      *
      * @param obj
      * @return
@@ -151,12 +151,37 @@ public class QueryBuilder {
     }
 
     /**
-     * TODO: Доработать метод Delete в рамках выполнения домашней работы
+     * Запрос на удаление данных из БД
+     *
+     * @param clazz
+     * @param primaryKey
      * @return
      */
-    public String buildDeleteQuery(){
-        return "";
-    }
+    public String buildDeleteQuery(Class<?> clazz, UUID primaryKey) {
+        if (!clazz.isAnnotationPresent(Table.class)) {
+            return "";
+        }
 
+        StringBuilder query = new StringBuilder("DELETE FROM ");
+
+        Table tableAnnotation = clazz.getAnnotation(Table.class);
+        query.append(tableAnnotation.name()).append(" WHERE ");
+
+        Field[] fields = clazz.getDeclaredFields();
+        for (Field field : fields) {
+            if (field.isAnnotationPresent(Column.class)) {
+                Column columnAnnotation = field.getAnnotation(Column.class);
+                if (columnAnnotation.primaryKey()) {
+                    query.append(columnAnnotation.name())
+                            .append(" = ")
+                            .append("'")
+                            .append(primaryKey)
+                            .append("'");
+                    break;
+                }
+            }
+        }
+        return query.toString();
+    }
 
 }
